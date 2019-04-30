@@ -28,7 +28,7 @@ module Delayed
       end
 
       def visit_Psych_Nodes_Mapping(object) # rubocop:disable CyclomaticComplexity, MethodName, PerceivedComplexity
-        return revive(Psych.load_tags[object.tag], object) if Psych.load_tags[object.tag]
+        return revive(resolve_class(Psych.load_tags[object.tag]), object) if Psych.load_tags[object.tag]
 
         case object.tag
         when %r{^!ruby/object}
